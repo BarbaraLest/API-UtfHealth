@@ -1,0 +1,27 @@
+{
+  "name": "api-utfhealth",
+  "version": "1.0.0",
+  "description": "api rest ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BarbaraLest/API-UtfHealth.git"
+  },
+  "keywords": [
+    "node",
+    "rest",
+    "api"
+  ],
+  "author": "Barbara Rodrigues",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BarbaraLest/API-UtfHealth/issues"
+  },
+  "homepage": "https://github.com/BarbaraLest/API-UtfHealth#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

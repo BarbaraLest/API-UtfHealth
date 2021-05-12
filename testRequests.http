@@ -1,0 +1,11 @@
+@base_address = http://localhost:3000
+
+
+get {{base_address}}/teste/especial
+
+###
+patch  {{base_address}}/teste
+
+###
+delete {{base_address}}/appointment
+
