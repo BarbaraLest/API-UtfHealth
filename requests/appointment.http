@@ -1,0 +1,45 @@
+@base_address = http://localhost:3000
+
+get {{base_address}}/appointment
+
+###
+get {{base_address}}/appointment/1
+
+###
+patch {{base_address}}/appointment
+content-Type: application/json
+
+{
+   "date": "2021-05-05",
+   "time": "00:00:00",
+   "place": "teste",
+   "observations": "teste",
+   "Doctor_idDoctor": "2",
+   "Student_idStudent": "1",
+   "idAppointment" : "1"
+
+}
+
+//////////////////////////////////////////N TA FUNCIONANDO
+###
+post {{base_address}}/appointment
+content-Type: application/json
+
+{
+  "date": "2021-05-05T03:00:00.000Z",
+   "time": "00:00:00",
+   "place": "teste",
+   "observations": "teste",
+   "Doctor_idDoctor": "2",
+   "Student_idStudent": "1",
+
+}
+
+###
+delete {{base_address}}/appointment
+content-Type: application/json
+
+{
+   "idAppointment":"1"
+
+}

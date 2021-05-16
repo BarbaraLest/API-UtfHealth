@@ -1,0 +1,37 @@
+@base_address = http://localhost:3000
+
+
+###
+get {{base_address}}/schedules
+
+###
+get {{base_address}}/schedules/2
+
+
+###
+post {{base_address}}/schedules
+content-Type: application/json
+
+{
+  "data":   { "data": { } },
+   "Doctor_idDoctor":"2"
+}
+
+###
+post {{base_address}}/schedules
+content-Type: application/json
+
+{
+    "data":   { "data": { } },
+   "Doctor_idDoctor":"2",
+   "idSchedules": "1"
+
+}
+
+###
+delete {{base_address}}/schedules
+content-Type: application/json
+
+{
+   "idSchedules": 1
+}

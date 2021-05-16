@@ -5,7 +5,7 @@ const mysql = require('./../mysql').pool
 router.get('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
-            'SELECT * FROM Appointment',
+            'SELECT * FROM Schedules',
             (error, resultado, field) => {
                 conn.release()
 
@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
                     })
                 }
                 res.status(200).send({
-                    message: "Appointment",
+                    message: "Schedules",
                     data: resultado
                 })
             }
@@ -26,10 +26,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-     mysql.getConnection((error, conn) => {
+    mysql.getConnection((error, conn) => {
         conn.query(
-            'INSERT INTO Appointment (date, time, place, observations, Doctor_idDoctor, Student_idStudent ) VALUES (?, ?, ?, ?, ?, ?)',
-            [req.body.date, req.body.time,  req.body.place,  req.body.observations,  req.body.Doctor_idDoctor,  req.body.Student_idStudent],
+            'INSERT INTO Schedules (data, Doctor_idDoctor) VALUES (?, ?)',
+            [req.body.date, req.body.Doctor_idDoctor],
             (error, resultado, field) => {
                 conn.release();
                 if (error) {
@@ -39,22 +39,21 @@ router.post('/', (req, res, next) => {
                     })
                 }
                 res.status(201).send({
-                    message: "A consulta foi criada",
+                    message: "O horario foi inserido",
                     data: resultado
                 })
             }
 
         )
-    })    
-    
+    })
 })
 
-router.get('/:idAppointment', (req, res, next) => {
-    const idAppointment = req.params.idAppointment
-    
+router.get('/:idSchedules', (req, res, next) => {
+    const idSchedules = req.params.idSchedules
+
     mysql.getConnection((error, conn) => {
         conn.query(
-            `SELECT * FROM Appointment WHERE idAppointment = ${idAppointment} `,
+            `SELECT * FROM Schedules WHERE idSchedules = ${idSchedules} `,
             (error, resultado, field) => {
                 conn.release()
                 if (error) {
@@ -65,44 +64,20 @@ router.get('/:idAppointment', (req, res, next) => {
                     })
                 }
                 res.status(200).send({
-                    message: "Appointment",
+                    message: "Schedule",
                     data: resultado
                 })
             }
 
         )
-    }) 
-
+    })
 })
 
 router.patch('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
-            'UPDATE Appointment SET date = ?, time = ? , place = ?, observations = ?, Doctor_idDoctor = ?, Student_idStudent = ? WHERE idAppointment = ?',
-            [req.body.date, req.body.time,  req.body.place,  req.body.observations,  req.body.Doctor_idDoctor,  req.body.Student_idStudent, req.body.idAppointment],
-            (error, resultado, field) => {
-                conn.release();
-                if (error) {
-                    return res.status(500).send({
-                        error: error,
-                        response: resultado
-                    })
-                }
-                res.status(201).send({
-                    message: "A consulta foi alterada",
-                    data: resultado
-                })
-            }
-
-        )
-    })    
-})
-
-router.delete('/', (req, res, next) => {
-    mysql.getConnection((error, conn) => {
-        conn.query(
-            'DELETE FROM Appointment WHERE idAppointment = ?',
-            [req.body.idAppointment],
+            `UPDATE Schedules SET data = ?, Doctor_id_Doctor = ? WHERE idSchedules = ? `,
+            [req.body.data, req.body.Doctor_idDoctor, req.body.idSchedules],
             (error, resultado, field) => {
                 conn.release();
                 if (error) {
@@ -112,7 +87,7 @@ router.delete('/', (req, res, next) => {
                     })
                 }
                 res.status(200).send({
-                    message: "A consulta foi excluida",
+                    message: "O horario foi alterado",
                     data: resultado
                 })
             }
@@ -121,6 +96,28 @@ router.delete('/', (req, res, next) => {
     })
 })
 
+router.delete('/', (req, res, next) => {
+    mysql.getConnection((error, conn) => {
+        conn.query(
+            'DELETE FROM Schedules WHERE idSchedules = ?',
+            [req.body.idSchedules],
+            (error, resultado, field) => {
+                conn.release();
+                if (error) {
+                    return res.status(500).send({
+                        error: error,
+                        response: resultado
+                    })
+                }
+                res.status(200).send({
+                    message: "O horario foi excluido",
+                    data: resultado
+                })
+            }
 
+        )
+    })
+
+})
 
 module.exports = router

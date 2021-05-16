@@ -1,0 +1,44 @@
+@base_address = http://localhost:3000
+
+
+###
+get {{base_address}}/doctor
+
+###
+get {{base_address}}/doctor/2
+
+
+###
+post {{base_address}}/doctor
+content-Type: application/json
+
+{
+   "name": "name",
+   "specialty": "specialty",
+   "email": "email",
+   "register": "register"
+
+}
+
+###
+patch {{base_address}}/doctor
+content-Type: application/json
+
+{
+   "name": "alter",
+   "specialty": "alter",
+   "email": "email",
+   "register": "register",
+   "idDoctor": 1
+
+}
+
+###
+delete {{base_address}}/doctor
+content-Type: application/json
+
+{
+
+   "idDoctor": 1
+
+}
