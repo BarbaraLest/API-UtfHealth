@@ -5,17 +5,18 @@
 get {{base_address}}/student
 
 ###
-get {{base_address}}/student/1
+get {{base_address}}/student/12
 
 ###
 post {{base_address}}/student
 content-Type: application/json
 
 {
-   "name": "name",
    "email": "email",
-   "register": "register",
-  
+   "name": "name",
+   "register": "101010",
+   "password": "123456"
+   
 }
 
 ###
@@ -23,10 +24,11 @@ patch {{base_address}}/student
 content-Type: application/json
 
 {
-   "name": "name",
+   "name": "Vinicius",
    "email": "email",
    "register": "register",
-   "idStudent": 1
+   "password": "1233",
+   "idStudent": 12
   
 }
 

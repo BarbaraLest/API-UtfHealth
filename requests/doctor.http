@@ -16,7 +16,8 @@ content-Type: application/json
    "name": "name",
    "specialty": "specialty",
    "email": "email",
-   "register": "register"
+   "register": "register",
+   "password" : "123"
 
 }
 
@@ -29,6 +30,7 @@ content-Type: application/json
    "specialty": "alter",
    "email": "email",
    "register": "register",
+   "password" : "123",
    "idDoctor": 1
 
 }

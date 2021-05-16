@@ -1,24 +1,25 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('./../mysql').pool
+const bcrypt = require('bcrypt')
 
 
 router.get('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
             'SELECT * FROM Student',
-            (error, resultado, field) => {
+            (error, result, field) => {
                 conn.release()
 
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: null
+                        response: result
                     })
                 }
                 res.status(200).send({
                     message: "Student",
-                    data: resultado
+                    data: result
                 })
             }
 
@@ -27,29 +28,6 @@ router.get('/', (req, res, next) => {
 
 })
 
-////////////////////////ARRUMAR NO DB
-router.post('/', (req, res, next) => {
-    mysql.getConnection((error, conn) => {
-        conn.query(
-            'INSERT INTO Student (name, email, register ) VALUES (?, ?, ?)',
-            [req.body.name, req.body.email, req.body.register],
-            (error, resultado, field) => {
-                conn.release();
-                if (error) {
-                    return res.status(500).send({
-                        error: error,
-                        response: resultado
-                    })
-                }
-                res.status(201).send({
-                    message: "O aluno foi inserido",
-                    //id_student: resultado
-                })
-            }
-
-        )
-    })
-})
 
 router.get('/:idStudent', (req, res, next) => {
     const idStudent = req.params.idStudent
@@ -57,18 +35,18 @@ router.get('/:idStudent', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
             `SELECT * FROM Student WHERE idStudent = ${idStudent} `,
-            (error, resultado, field) => {
+            (error, result, field) => {
                 conn.release()
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: null
+                        response: result
 
                     })
                 }
                 res.status(200).send({
                     message: "Student",
-                    data: resultado
+                    data: result
                 })
             }
 
@@ -80,19 +58,19 @@ router.patch('/', (req, res, next) => {
 
     mysql.getConnection((error, conn) => {
         conn.query(
-            `UPDATE Student SET name = ?, email = ?, register = ? WHERE idStudent = ? `,
-            [req.body.name, req.body.email, req.body.register, req.body.idStudent],
-            (error, resultado, field) => {
+            `UPDATE Student SET name = ?, email = ?, register = ?, password = ? WHERE idStudent = ? `,
+            [req.body.name, req.body.email, req.body.register, req.body.password, req.body.idStudent],
+            (error, result, field) => {
                 conn.release();
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: resultado
+                        response: result
                     })
                 }
                 res.status(200).send({
-                    message: "O aluno foi alterado",
-                    data: resultado
+                    message: "Student changed",
+                    data: result
                 })
             }
 
@@ -102,24 +80,22 @@ router.patch('/', (req, res, next) => {
 })
 
 router.delete('/', (req, res, next) => {
-    const student = {
-        idStudent: req.body.idStudent
-    }
+
     mysql.getConnection((error, conn) => {
         conn.query(
             'DELETE FROM Student WHERE idStudent = ?',
             [req.body.idStudent],
-            (error, resultado, field) => {
+            (error, result, field) => {
                 conn.release();
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: resultado
+                        response: result
                     })
                 }
                 res.status(200).send({
-                    message: "O aluno foi excluido",
-                    data: student
+                    message: "Student excluded",
+                    data: result
                 })
             }
 
@@ -127,5 +103,41 @@ router.delete('/', (req, res, next) => {
     })
 
 })
+
+router.post('/', (req, res, next) => {
+    mysql.getConnection((error, conn) => {
+
+        bcrypt.hash(req.body.password, 10, (errBcrypt, hash) => {
+            if(errBcrypt){ 
+                return res.status(500).send({ 
+                    error: errBcrypt
+                })
+            }
+            conn.query(
+                'INSERT INTO Student (name, email, register, password) VALUES (?, ?, ?, ?)',
+                [req.body.name, req.body.email, req.body.register, hash],
+                (error, result, field) => {
+                    conn.release();
+                    if (error) {
+                        return res.status(500).send({
+
+                            error: error,
+                            response: result
+                        })
+                    }
+                    res.status(200).send({
+                        message: "Student created",
+                        data: result
+                    })
+                }
+    
+            )
+
+
+        })
+        
+    })
+})
+
 
 module.exports = router

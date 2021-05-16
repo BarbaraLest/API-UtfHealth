@@ -20,19 +20,20 @@ content-Type: application/json
 
 }
 
-//////////////////////////////////////////N TA FUNCIONANDO
+
 ###
 post {{base_address}}/appointment
 content-Type: application/json
 
 {
-  "date": "2021-05-05T03:00:00.000Z",
-   "time": "00:00:00",
-   "place": "teste",
-   "observations": "teste",
-   "Doctor_idDoctor": "2",
-   "Student_idStudent": "1",
-
+   
+  "Student_idStudent": 1,
+  "Doctor_idDoctor": 2,
+  "date": "2021-05-05",
+  "time": "00:00",
+  "place": "nuape",
+  "observations": "testes"
+  
 }
 
 ###

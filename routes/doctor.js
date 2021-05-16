@@ -6,18 +6,18 @@ router.get('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
             'SELECT * FROM Doctor',
-            (error, resultado, field) => {
+            (error, result, field) => {
                 conn.release()
 
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: null
+                        response: result
                     })
                 }
                 res.status(200).send({
                     message: "Doctor",
-                    data: resultado
+                    data: result
                 })
             }
 
@@ -30,19 +30,19 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
-            'INSERT INTO Doctor (name, specialty, email, register ) VALUES (?, ?, ?, ?)',
-            [req.body.name, req.body.specialty, req.body.email, req.body.register],
-            (error, resultado, field) => {
+            'INSERT INTO Doctor (name, specialty, email, register, password ) VALUES (?, ?, ?, ?, ?)',
+            [req.body.name, req.body.specialty, req.body.email, req.body.register, req.body.password],
+            (error, result, field) => {
                 conn.release();
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: resultado
+                        response: result
                     })
                 }
                 res.status(200).send({
-                    message: "O medico foi criado",
-                    data: resultado.insertId
+                    message: "Doctor created",
+                    data: result
                 })
             }
 
@@ -56,18 +56,18 @@ router.get('/:idDoctor', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
             `SELECT * FROM Doctor WHERE idDoctor = ${idDoctor}`,
-            (error, resultado, field) => {
+            (error, result, field) => {
                 conn.release()
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: null
+                        response: result
 
                     })
                 }
                 res.status(200).send({
                     message: "Doctor",
-                    data: resultado
+                    data: result
                 })
             }
 
@@ -80,19 +80,19 @@ router.patch('/', (req, res, next) => {
 
     mysql.getConnection((error, conn) => {
         conn.query(
-            `UPDATE Doctor SET name = ?, specialty = ?, email = ?, register = ? WHERE idDoctor = ? `,
-            [req.body.name, req.body.specialty, req.body.email, req.body.register, req.body.idDoctor],
-            (error, resultado, field) => {
+            `UPDATE Doctor SET name = ?, specialty = ?, email = ?, register = ?, password=? WHERE idDoctor = ? `,
+            [req.body.name, req.body.specialty, req.body.email, req.body.register, req.body.password, req.body.idDoctor],
+            (error, result, field) => {
                 conn.release();
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: resultado
+                        response: result
                     })
                 }
                 res.status(200).send({
-                    message: "O medico foi alterado",
-                    data: resultado
+                    message: "Doctor changed",
+                    data: result
                 })
             }
 
@@ -109,17 +109,17 @@ router.delete('/', (req, res, next) => {
         conn.query(
             'DELETE FROM Doctor WHERE idDoctor = ?',
             [req.body.idDoctor],
-            (error, resultado, field) => {
+            (error, result, field) => {
                 conn.release();
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: resultado
+                        response: result
                     })
                 }
                 res.status(200).send({
-                    message: "O doutor foi excluido",
-                    data: resultado
+                    message: "Doctor excluded",
+                    data: result
                 })
             }
 
