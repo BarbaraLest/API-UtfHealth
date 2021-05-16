@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('./../mysql').pool
+const bcrypt = require('bcrypt')
 
 router.get('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
@@ -29,24 +30,34 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
-        conn.query(
-            'INSERT INTO Doctor (name, specialty, email, register, password ) VALUES (?, ?, ?, ?, ?)',
-            [req.body.name, req.body.specialty, req.body.email, req.body.register, req.body.password],
-            (error, result, field) => {
-                conn.release();
-                if (error) {
-                    return res.status(500).send({
-                        error: error,
-                        response: result
-                    })
-                }
-                res.status(200).send({
-                    message: "Doctor created",
-                    data: result
+        bcrypt.hash(req.body.password, 10, (errBcrypt, hash) => {
+            if(errBcrypt){ 
+                return res.status(500).send({ 
+                    error: errBcrypt
                 })
             }
+            conn.query(
+                'INSERT INTO Doctor (name, specialty, email, register, password ) VALUES (?, ?, ?, ?, ?)',
+                [req.body.name, req.body.specialty, req.body.email, req.body.register, hash],
+                (error, result, field) => {
+                    conn.release();
+                    if (error) {
+                        return res.status(500).send({
+                            error: error,
+                            response: result
+                        })
+                    }
+                    res.status(200).send({
+                        message: "Doctor created",
+                        data: result
+                    })
+                }
+    
+            )
 
-        )
+
+        })
+       
     })
 })
 

@@ -12,7 +12,7 @@ post {{base_address}}/student
 content-Type: application/json
 
 {
-   "email": "email",
+   "email": "teste@brs",
    "name": "name",
    "register": "101010",
    "password": "123456"
@@ -38,4 +38,14 @@ content-Type: application/json
 
 {
    "idStudent": 2
+}
+
+###'
+post {{base_address}}/student/auth
+content-Type: application/json
+
+{
+   "register": "101010",
+   "password": "123456"
+   
 }
