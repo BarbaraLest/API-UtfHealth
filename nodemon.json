@@ -4,8 +4,8 @@
         "MYSQL_PASSWORD": "root",
         "MYSQL_DATABASE": "UtfDB",
         "MYSQL_HOST": "localhost",
-        "MYSQL_PORT": 3306 ,
-        "JWT_KEY" : "secret" 
+        "MYSQL_PORT": 3306 
+        
         
     }
 }

@@ -13,10 +13,10 @@ post {{base_address}}/doctor
 content-Type: application/json
 
 {
-   "name": "name",
-   "specialty": "specialty",
-   "email": "email",
-   "register": "register",
+   "name": "Adriana",
+   "specialty": "Dentista",
+   "email": "adriana@exemplo",
+   "register": "s44444", 
    "password" : "123"
 
 }
@@ -41,6 +41,6 @@ content-Type: application/json
 
 {
 
-   "idDoctor": 1
+   "idDoctor": 2
 
 }

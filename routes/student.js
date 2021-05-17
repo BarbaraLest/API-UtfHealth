@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
+
 router.get('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
@@ -159,14 +160,7 @@ router.post('/auth', (req, res, next) => {
                 }
 
                 if (result) {
-                    let token = jwt.sign({
-                        idStudent: results[0].idStudent,
-                        register: results[0].register
-                    }, 
-                    process.env.JWR_KEY,
-                    {
-                        expiresIn:"5d"
-                    })
+                    let token = jwt.sign({ idStudent: results[0].idStudent, register: results[0].register }, 'secret', { expiresIn: "90" })
                     return res.status(200).send({ message: "Auth success", token: token })
                 }
 

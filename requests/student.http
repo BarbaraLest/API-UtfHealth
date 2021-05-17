@@ -1,6 +1,5 @@
 @base_address = http://localhost:3000
 
-
 ###
 get {{base_address}}/student
 
@@ -12,9 +11,9 @@ post {{base_address}}/student
 content-Type: application/json
 
 {
-   "email": "teste@brs",
-   "name": "name",
-   "register": "101010",
+   "email": "manuel@manu",
+   "name": "manuel",
+   "register": "a5555",
    "password": "123456"
    
 }
@@ -45,7 +44,7 @@ post {{base_address}}/student/auth
 content-Type: application/json
 
 {
-   "register": "101010",
+   "register": "a123456",
    "password": "123456"
    
 }

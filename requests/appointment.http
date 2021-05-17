@@ -3,7 +3,7 @@
 get {{base_address}}/appointment
 
 ###
-get {{base_address}}/appointment/1
+get {{base_address}}/appointment/4
 
 ###
 patch {{base_address}}/appointment
@@ -27,8 +27,8 @@ content-Type: application/json
 
 {
    
-  "Student_idStudent": 1,
-  "Doctor_idDoctor": 2,
+  "Student_idStudent": 31,
+  "Doctor_idDoctor": 10,
   "date": "2021-05-05",
   "time": "00:00",
   "place": "nuape",
@@ -41,6 +41,6 @@ delete {{base_address}}/appointment
 content-Type: application/json
 
 {
-   "idAppointment":"1"
+   "idAppointment":4
 
 }
