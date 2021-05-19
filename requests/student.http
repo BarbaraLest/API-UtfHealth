@@ -11,9 +11,9 @@ post {{base_address}}/student
 content-Type: application/json
 
 {
-   "email": "manuel@manu",
-   "name": "manuel",
-   "register": "a5555",
+   "email": "barbara@brs",
+   "name": "barbara",
+   "register": "a2041707",
    "password": "123456"
    
 }
