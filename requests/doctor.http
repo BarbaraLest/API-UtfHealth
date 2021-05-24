@@ -13,11 +13,11 @@ post {{base_address}}/doctor
 content-Type: application/json
 
 {
-   "name": "Adriana",
-   "specialty": "Dentista",
-   "email": "adriana@exemplo",
-   "register": "s44444", 
-   "password" : "123"
+   "name": "",
+   "specialty":"",
+   "email":"",
+   "register": "",
+   "password" : "",
 
 }
 
@@ -26,12 +26,12 @@ patch {{base_address}}/doctor
 content-Type: application/json
 
 {
-   "name": "alter",
-   "specialty": "alter",
-   "email": "email",
-   "register": "register",
-   "password" : "123",
-   "idDoctor": 1
+   "name": "",
+   "specialty": "",
+   "email": "",
+   "register": "",
+   "password" :"",
+   "idDoctor": "",
 
 }
 
@@ -41,6 +41,6 @@ content-Type: application/json
 
 {
 
-   "idDoctor": 6
+   "idDoctor": "",
 
 }

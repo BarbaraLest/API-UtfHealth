@@ -1,0 +1,49 @@
+@base_address = http://localhost:3000
+
+###
+get {{base_address}}/psychologicalHistory
+
+###
+get {{base_address}}/psychologicalHistory/7
+
+
+/////////////////////////NAO TA FUNCIONANDO
+###
+post {{base_address}}/psychologicalHistory
+content-Type: application/json
+
+{
+           
+            "psychologicalSupporty":"",
+            "tdah":"",
+            "anxiety":"",
+            "antidepressant":"",
+             "idStudent": "",
+            "observation" :"",
+   
+}
+
+###
+patch {{base_address}}/psychologicalHistory
+content-Type: application/json
+
+{
+           "psychologicalSupporty":"",
+            "tdah":"",
+            "anxiety":"",
+            "antidepressant":"",
+             "idStudent": "",
+            "observation" :"",
+             "idpsychologicalHistory": ""
+}
+
+###
+delete {{base_address}}/psychologicalHistory
+content-Type: application/json
+
+{
+
+   "idpsychologicalHistory": ""
+
+}
+

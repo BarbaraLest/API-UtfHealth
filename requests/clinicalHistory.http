@@ -1,0 +1,62 @@
+@base_address = http://localhost:3000
+
+###
+get {{base_address}}/clinicalHistory
+
+###
+get {{base_address}}/clinicalHistory/7
+
+
+/////////////////////////NAO TA FUNCIONANDO
+###
+post {{base_address}}/clinicalHistory
+content-Type: application/json
+
+{
+            "idStudent": "",
+            "allergy1":"",
+            "allergy2":"",
+            "allergy3":"",
+            "chronicDisease1":"",
+            "chronicDisease2":"",
+             "chronicDisease3":"",
+            "familyDisease1":"",
+            "familyDisease2":"",
+            "familyDisease3":"",
+            "observation" : "",
+
+}
+
+###
+patch {{base_address}}/clinicalHistory
+content-Type: application/json
+
+{
+            "idStudent": "",
+            "allergy1":"",
+            "allergy2":"",
+            "allergy3":"",
+            "chronicDisease1":"",
+            "chronicDisease2":"",
+             "chronicDisease3":"",
+            "familyDisease1":"",
+            "familyDisease2":"",
+            "familyDisease3":"",
+             "observation" : "",
+             "idclinicalHistory": "",
+}
+
+###
+delete {{base_address}}/clinicalHistory
+content-Type: application/json
+
+{
+
+   "idclinicalHistory": "",
+
+}
+
+###
+
+get {{base_address}}/clinicalHistory/emptyOrNot/
+

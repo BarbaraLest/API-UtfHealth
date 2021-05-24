@@ -2,34 +2,37 @@ const express = require('express')
 const router = express.Router()
 const mysql = require('./../mysql').pool
 
+
 router.get('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
-            'SELECT Doctor.idDoctor, Doctor.name, Doctor.specialty, Appointment.idAppointment, Appointment.date, Appointment.time, Appointment.place, Appointment.observations FROM Appointment INNER JOIN Doctor on Doctor.idDoctor = Appointment.Doctor_idDoctor ',
+            'SELECT * FROM dentalHistory',
             (error, result, field) => {
                 conn.release()
 
                 if (error) {
                     return res.status(500).send({
                         error: error,
-                        response: null
+                        response: result
                     })
                 }
                 res.status(200).send({
-                    message: "Appointment",
+                    message: "Dental History",
                     data: result
                 })
             }
 
         )
     })
+
 })
 
 router.post('/', (req, res, next) => {
+
     mysql.getConnection((error, conn) => {
         conn.query(
-            'INSERT INTO Appointment (date, time, place, observations, Doctor_idDoctor, Student_idStudent ) VALUES (?, ?, ?, ?, ?, ?)',
-            [req.body.date, req.body.time, req.body.place, req.body.observations, req.body.Doctor_idDoctor, req.body.Student_idStudent],
+            'INSERT INTO  dentalHistory  ( idStudent, caries, dentalAppliance, canal, wisdomExtraction, observation) VALUES (?, ?, ?, ?,?, ?)',
+            [req.body.idStudent, req.body.caries, req.body.dentalAppliance, req.body.canal, req.body.wisdomExtraction, req.body.observation],
             (error, result, field) => {
                 conn.release();
                 if (error) {
@@ -39,8 +42,8 @@ router.post('/', (req, res, next) => {
                     })
                 }
                 res.status(201).send({
-                    message: "Appointment created",
-                    data: result,
+                    message: "Dental History created",
+                    data: result
                 })
             }
 
@@ -49,20 +52,50 @@ router.post('/', (req, res, next) => {
 
 })
 
-router.get('/:idStudent', (req, res, next) => {
-    const idStudent = req.params.idStudent
+router.get('/:iddentalHistory', (req, res, next) => {
+    const iddentalHistory = req.params.iddentalHistory
+
 
     mysql.getConnection((error, conn) => {
         conn.query(
-
-            `SELECT Doctor.idDoctor, Doctor.name, Doctor.specialty, Appointment.idAppointment, Appointment.date, Appointment.time, Appointment.place, Appointment.observations FROM Appointment INNER JOIN Doctor on Doctor.idDoctor = Appointment.Doctor_idDoctor WHERE Student_idStudent = ${idStudent} ORDER BY  Appointment.date`,
-            //   `SELECT * FROM Appointment WHERE idAppointment = ${idAppointment} `,
+            `SELECT * FROM dentalHistory WHERE iddentalHistory = ${iddentalHistory} `,
             (error, result, field) => {
                 conn.release()
                 if (error) {
                     return res.status(500).send({
                         error: error,
                         response: result
+
+                    })
+                }
+                res.status(200).send({
+                    message: "Dental History",
+                    data: result
+                })
+            }
+
+        )
+    })
+
+
+
+})
+
+
+router.get('/emptyOrNot/:idStudent', (req, res, next) => {
+    const idStudent = req.params.idStudent
+
+
+    mysql.getConnection((error, conn) => {
+        conn.query(
+            `SELECT * FROM dentalHistory WHERE idStudent = ${idStudent} `,
+            (error, result, field) => {
+                conn.release()
+                if (error) {
+                    return res.status(500).send({
+                        error: error,
+                        response: result
+
                     })
                 }
                 res.status(200).send({
@@ -72,24 +105,27 @@ router.get('/:idStudent', (req, res, next) => {
 
         )
     })
+
+
 
 })
 
 router.patch('/', (req, res, next) => {
     mysql.getConnection((error, conn) => {
         conn.query(
-            'UPDATE Appointment SET date = ?, time = ? , place = ?, observations = ?, Doctor_idDoctor = ?, Student_idStudent = ? WHERE idAppointment = ?',
-            [req.body.date, req.body.time, req.body.place, req.body.observations, req.body.Doctor_idDoctor, req.body.Student_idStudent, req.body.idAppointment],
+            `UPDATE dentalHistory SET idStudent = ? dStudent = ? , caries = ?, dentalAppliance = ?, canal = ?, wisdomExtraction = ?, observation = ?  WHERE iddentalHistory = ?`,
+            [req.body.idStudent, req.body.caries, req.body.dentalAppliance, req.body.canal, req.body.wisdomExtraction, req.body.observation, req.body.iddentalHistory],
             (error, result, field) => {
-                conn.release();
+                conn.release()
                 if (error) {
                     return res.status(500).send({
                         error: error,
                         response: result
+
                     })
                 }
-                res.status(201).send({
-                    message: "Appointment changed",
+                res.status(200).send({
+                    message: "dental History changed",
                     data: result
                 })
             }
@@ -99,10 +135,11 @@ router.patch('/', (req, res, next) => {
 })
 
 router.delete('/', (req, res, next) => {
+
     mysql.getConnection((error, conn) => {
         conn.query(
-            'DELETE FROM Appointment WHERE idAppointment = ?',
-            [req.body.idAppointment],
+            'DELETE FROM clinicalHistory WHERE iddentalHistory = ?',
+            [req.body.iddentalHistory],
             (error, result, field) => {
                 conn.release();
                 if (error) {
@@ -112,7 +149,7 @@ router.delete('/', (req, res, next) => {
                     })
                 }
                 res.status(200).send({
-                    message: "Appointment excluded",
+                    message: "dental History excluded",
                     data: result
                 })
             }
@@ -120,7 +157,5 @@ router.delete('/', (req, res, next) => {
         )
     })
 })
-
-
 
 module.exports = router

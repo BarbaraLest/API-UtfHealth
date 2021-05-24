@@ -11,10 +11,10 @@ post {{base_address}}/student
 content-Type: application/json
 
 {
-   "email": "barbara@brs",
-   "name": "barbara",
-   "register": "a2041707",
-   "password": "123456"
+   "email": "",
+   "name": "",
+   "register": "",
+   "password": ""
    
 }
 
@@ -23,11 +23,11 @@ patch {{base_address}}/student
 content-Type: application/json
 
 {
-   "name": "Vinicius",
-   "email": "email",
-   "register": "register",
-   "password": "1233",
-   "idStudent": 12
+   "name": "",
+   "email": "",
+   "register": "",
+   "password": "",
+   "idStudent": "",
   
 }
 
@@ -36,7 +36,7 @@ delete {{base_address}}/student
 content-Type: application/json
 
 {
-   "idStudent": 2
+   "idStudent": "",
 }
 
 ###'
@@ -44,7 +44,7 @@ post {{base_address}}/student/auth
 content-Type: application/json
 
 {
-   "register": "a123456",
-   "password": "123456"
+   "register": "",
+   "password": """,
    
 }

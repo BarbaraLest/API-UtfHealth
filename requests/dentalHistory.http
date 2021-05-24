@@ -1,0 +1,49 @@
+@base_address = http://localhost:3000
+
+###
+get {{base_address}}/dentalHistory
+
+###
+get {{base_address}}/dentalHistory/7
+
+
+/////////////////////////NAO TA FUNCIONANDO
+###
+post {{base_address}}/dentalHistory
+content-Type: application/json
+
+{
+            "idStudent":"",
+            "caries":"",
+            "dentalAppliance":"",
+            "canal":"",
+            "wisdomExtraction":"",
+             "observation" :""
+      
+   
+}
+
+###
+patch {{base_address}}/dentalHistory
+content-Type: application/json
+
+{
+            "idStudent": "",
+            "caries":"",
+            "dentalAppliance":"",
+            "canal":"",
+            "wisdomExtraction":"",
+             "observation" : "",
+             "iddentalHistory": "",
+}
+
+###
+delete {{base_address}}/dentalHistory
+content-Type: application/json
+
+{
+
+   "iddentalHistory": "",
+
+}
+

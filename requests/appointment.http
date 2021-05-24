@@ -3,20 +3,20 @@
 get {{base_address}}/appointment
 
 ###
-get {{base_address}}/appointment/4
+get {{base_address}}/appointment/33
 
 ###
 patch {{base_address}}/appointment
 content-Type: application/json
 
 {
-   "date": "2021-05-05",
-   "time": "00:00:00",
-   "place": "teste",
-   "observations": "teste",
-   "Doctor_idDoctor": "2",
-   "Student_idStudent": "1",
-   "idAppointment" : "1"
+   "date": "",
+   "time": "",
+   "place": "",
+   "observations": "",
+   "Doctor_idDoctor": "",
+   "Student_idStudent": "",
+   "idAppointment" : "",
 
 }
 
@@ -27,12 +27,12 @@ content-Type: application/json
 
 {
    
-  "Student_idStudent": 31,
-  "Doctor_idDoctor": 10,
-  "date": "2021-05-05",
-  "time": "00:00",
-  "place": "nuape",
-  "observations": "testes"
+  "Student_idStudent": "",
+  "Doctor_idDoctor": "",
+  "date":"",
+  "time": "",
+  "place": "",
+  "observations": "",
   
 }
 
@@ -41,6 +41,6 @@ delete {{base_address}}/appointment
 content-Type: application/json
 
 {
-   "idAppointment":4
+   "idAppointment":"",
 
 }

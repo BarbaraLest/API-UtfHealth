@@ -1,0 +1,47 @@
+@base_address = http://localhost:3000
+
+###
+get {{base_address}}/schoolHistory
+
+###
+get {{base_address}}/schoolHistory/7
+
+
+/////////////////////////NAO TA FUNCIONANDO
+###
+post {{base_address}}/schoolHistory
+content-Type: application/json
+
+{
+            "idStudent": "33",
+            "schedules":"schedules",
+            "routin":"routine",
+            "pedagogicalSupport": "",
+             "observation" : "observation"
+      
+   
+}
+
+###
+patch {{base_address}}/schoolHistory
+content-Type: application/json
+
+{
+            "idStudent": "32",
+            "schedules":"schedules",
+            "routin":"routine",
+            "pedagogicalSupport": "",
+             "observation" : "observation",
+             "idschoolHistory": 9
+}
+
+###
+delete {{base_address}}/schoolHistory
+content-Type: application/json
+
+{
+
+   "idschoolHistory": 7
+
+}
+

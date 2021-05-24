@@ -160,15 +160,15 @@ router.post('/auth', (req, res, next) => {
                 }
 
                 if (result) {
-                    let token = jwt.sign({ idStudent: results[0].idStudent, register: results[0].register }, 'secret', { expiresIn: "90" })
-                    return res.status(200).send({ message: "Auth success", token: token })
+                    let token = jwt.sign({ idStudent: results[0].idStudent, register: results[0].register, name: results[0].name, email: results[0].email }, 'secret', { expiresIn: "90" })
+                    return res.status(200).send({ message: "Auth success", token: token, idStudent: results[0].idStudent, register: results[0].register, name: results[0].name, email: results[0].email })
                 }
 
                 return res.status(401).send({ message: "Auth error aqui 3" })
 
             })
 
-           
+
         })
     })
 })
