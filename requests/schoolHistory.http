@@ -4,7 +4,11 @@
 get {{base_address}}/schoolHistory
 
 ###
-get {{base_address}}/schoolHistory/7
+get {{base_address}}/schoolHistory/
+
+
+###
+get {{base_address}}/schoolHistory/emptyOrNot/36
 
 
 /////////////////////////NAO TA FUNCIONANDO
@@ -13,10 +17,10 @@ post {{base_address}}/schoolHistory
 content-Type: application/json
 
 {
-            "idStudent": "33",
+            "idStudent": "36",
             "schedules":"schedules",
-            "routin":"routine",
-            "pedagogicalSupport": "",
+            "routine":"routine",
+            "pedagogicalSupport": "pedagogical",
              "observation" : "observation"
       
    
